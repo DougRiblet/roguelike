@@ -1,4 +1,6 @@
 import React from 'react'
+import Status from './Status'
+import Dungeon from './Dungeon'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -9,7 +11,12 @@ export default class App extends React.Component {
   render () {
     return (
       <div className='app'>
-        <p>Roguelike</p>
+        <div id='statusBar'>
+          <Status />
+        </div>
+        <div id='dungeon'>
+          <Dungeon />
+        </div>
       </div>
     )
   }
