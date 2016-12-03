@@ -57,7 +57,9 @@ export default class Dungeon extends React.Component {
   render () {
     return (
       <div>
-        <p>empty component</p>
+        <svg>
+
+        </svg>
       </div>
     )
   }

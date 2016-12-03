@@ -2,3 +2,18 @@ body {
   background-color: navy;
   color: ghostwhite;
 }
+
+svg {
+  width: 1200px;
+  height: 800px;
+  rect {
+    width: 10px;
+    height: 10px;
+    &.onrock {
+      fill: navy;
+    }
+    &.onopen {
+      fill: papayawhip;
+    }
+  }
+}
