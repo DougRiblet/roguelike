@@ -29,8 +29,8 @@ export default class Dungeon extends React.Component {
     let rw = 6 + Math.floor(Math.random() * 6)
     let rh = 6 + Math.floor(Math.random() * 6)
     // make Room position
-    let rx = Math.random() * (120 - rw)
-    let ry = Math.random() * (80 - rh)
+    let rx = Math.floor(Math.random() * (120 - rw))
+    let ry = Math.floor(Math.random() * (80 - rh))
     // check if position empty
     let empty = true
     for (let row = ry; row <= ry + rw; row++) {
