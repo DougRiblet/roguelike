@@ -4,33 +4,34 @@ export default class Dungeon extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      grid: Array.from({length: 70}, () => Array.from({length: 120}, () => 'rock'))
+      grid: Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock'))
     }
-    this.newDun = Array.from({length: 70}, () => Array.from({length: 120}, () => 'rock'))
+    this.newDun = Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock'))
     this.generateDungeon = this.generateDungeon.bind(this)
     this.generateRoom = this.generateRoom.bind(this)
   }
 
   generateDungeon () {
     // reset newDun to solid rock
-    this.newDun = Array.from({length: 70}, () => Array.from({length: 120}, () => 'rock'))
+    this.newDun = Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock'))
     let count = 0
     // fill up blank dungeon with rooms
     while (count < 300) {
-      this.generateRoom()
+      this.generateRoom(count)
       count++
     }
     // change state to show new dungeon
     this.setState({grid: this.newDun})
   }
 
-  generateRoom () {
+  generateRoom (count) {
+    let sizemin = Math.floor(6 + ((300 - count) / 100))
     // make Room dimensions
-    let rw = 7 + Math.floor(Math.random() * 12)
-    let rh = 7 + Math.floor(Math.random() * 12)
+    let rw = sizemin + Math.floor(Math.random() * sizemin * 2)
+    let rh = sizemin + Math.floor(Math.random() * sizemin * 1.5)
     // make Room position
     let rx = Math.floor(Math.random() * (119 - rw))
-    let ry = Math.floor(Math.random() * (69 - rh))
+    let ry = Math.floor(Math.random() * (59 - rh))
 
     console.log('w,h,x,y: ', rw, rh, rx, ry)
     // check if position empty

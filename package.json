@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon ./server/app.js",
     "build": "webpack --watch",
-    "test": "standard",
+    "lint": "standard",
     "build-css": "node-sass client/scss/main.scss client/public/css/main.css"
   },
   "author": "Doug Riblet",
