@@ -58,9 +58,9 @@ export default class Dungeon extends React.Component {
     if (empty) {
       this.rooms.push({
         'yc': ry + 1,
-        'yh': rh - 1,
+        'yh': rh - 2,
         'xc': rx + 1,
-        'xw': rw - 1
+        'xw': rw - 2
       })
       for (let row = ry + 1; row < ry + rh; row++) {
         for (let col = rx + 1; col < rx + rw; col++) {
@@ -97,8 +97,31 @@ export default class Dungeon extends React.Component {
         }
       }
     }
+    // if random spot doesn't make a connection, try again from upper left corner
+    if (nearest.dir === null) {
+      cury = curr.yc + 1
+      curx = curr.xc + 1
+      for (let i = 0; i < slotNum; i++) {
+        let prev = roomArr[i]
+        if (cury >= prev.yc && cury <= prev.yc + prev.yh) {
+          if (curx > prev.xc && curr.xc - (prev.xc + prev.xw) < nearest.len) {
+            nearest = {'len': curr.xc - (prev.xc + prev.xw), 'prev': i, 'dir': 'LR'}
+          }
+          if (curx < prev.xc && prev.xc - (curr.xc + curr.xw) < nearest.len) {
+            nearest = {'len': prev.xc - (curr.xc + curr.xw), 'prev': i, 'dir': 'LR'}
+          }
+        }
+        if (curx >= prev.xc && curx <= prev.xc + prev.xw) {
+          if (cury > prev.yc && curr.yc - (prev.yc + prev.yh) < nearest.len) {
+            nearest = {'len': curr.yc - (prev.yc + prev.yh), 'prev': i, 'dir': 'UD'}
+          }
+          if (cury < prev.yc && prev.yc - (curr.yc + curr.yh) < nearest.len) {
+            nearest = {'len': prev.yc - (curr.yc + curr.yh), 'prev': i, 'dir': 'UD'}
+          }
+        }
+      }
+    }
     // draw the tunnel
-    console.log("to/from: ", slotNum, nearest.prev)
     if (nearest.dir === 'LR') {
       let row = cury
       let lowcol = Math.min(curx, roomArr[nearest.prev].xc)
