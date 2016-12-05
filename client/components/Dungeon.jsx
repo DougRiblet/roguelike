@@ -121,7 +121,26 @@ export default class Dungeon extends React.Component {
         }
       }
     }
-    // draw the tunnel
+    // if still no connection, draw crooked tunnel
+    if (nearest.dir === null) {
+      let zigy = curr.yc + Math.ceil(curr.yh / 2)
+      let zigx = curr.xc + Math.ceil(curr.xw / 2)
+      let zagy = roomArr[slotNum - 1].yc + Math.ceil(roomArr[slotNum - 1].yh / 2)
+      let zagx = roomArr[slotNum - 1].xc + Math.ceil(roomArr[slotNum - 1].xw / 2)
+      let rowAcross = Math.min(zagy, zigy)
+      let lowcolAcross = Math.min(zagx, zigx)
+      let highcolAcross = Math.max(zagx, zigx)
+      let colDown = (zigy > zagy && zigx > zagx) ? Math.max(zagx, zigx) : Math.min(zagx, zigx)
+      let lowrowDown = Math.min(zagy, zigy)
+      let highrowDown = Math.max(zagy, zigy)
+      for (let colAcross = lowcolAcross; colAcross <= highcolAcross; colAcross++) {
+        this.newDun[rowAcross][colAcross] = 'open'
+      }
+      for (let rowDown = lowrowDown; rowDown <= highrowDown; rowDown++) {
+        this.newDun[rowDown][colDown] = 'open'
+      }
+    }
+    // if connection found, draw the tunnel
     if (nearest.dir === 'LR') {
       let row = cury
       let lowcol = Math.min(curx, roomArr[nearest.prev].xc)
