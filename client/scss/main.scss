@@ -15,7 +15,9 @@ svg {
     &.onopen {
       fill: papayawhip;
     }
-    &.onhero {
+  }
+  circle {
+    &.hero {
       fill: red;
     }
   }

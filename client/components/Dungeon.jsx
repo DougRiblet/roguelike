@@ -4,7 +4,8 @@ export default class Dungeon extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      grid: Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock'))
+      grid: Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock')),
+      hero: []
     }
     this.newDun = Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock'))
     this.rooms = []
@@ -33,11 +34,10 @@ export default class Dungeon extends React.Component {
       this.generateTunnel(roomsSorted, tunnelPass)
       tunnelPass++
     }
-    // place hero in upper left room to start
-    this.placeHeroStart(roomsSorted[0])
-
     // change state to show new dungeon
     this.setState({grid: this.newDun})
+    // place hero in upper left room to start
+    this.placeHeroStart(roomsSorted[0])
   }
 
   generateRoom (count) {
@@ -165,7 +165,7 @@ export default class Dungeon extends React.Component {
   placeHeroStart (room) {
     let startx = room.xc + Math.floor(Math.random() * room.xw)
     let starty = room.yc + Math.floor(Math.random() * room.yh)
-    this.newDun[starty][startx] = 'hero'
+    this.setState({hero: [startx, starty]})
   }
 
   componentDidMount () {
@@ -189,6 +189,12 @@ export default class Dungeon extends React.Component {
               })
             })
           }
+          <circle
+            className='hero'
+            cx={this.state.hero[0] * 10 + 5}
+            cy={this.state.hero[1] * 10 + 5}
+            r='4'
+          />
         </svg>
       </div>
     )
