@@ -5,7 +5,7 @@ export default class Dungeon extends React.Component {
     super(props)
     this.state = {
       grid: Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock')),
-      hero: []
+      hero: {'visible': false}
     }
     this.newDun = Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock'))
     this.rooms = []
@@ -13,6 +13,7 @@ export default class Dungeon extends React.Component {
     this.generateTunnel = this.generateTunnel.bind(this)
     this.generateRoom = this.generateRoom.bind(this)
     this.placeHeroStart = this.placeHeroStart.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   generateDungeon () {
@@ -165,11 +166,35 @@ export default class Dungeon extends React.Component {
   placeHeroStart (room) {
     let startx = room.xc + Math.floor(Math.random() * room.xw)
     let starty = room.yc + Math.floor(Math.random() * room.yh)
-    this.setState({hero: [startx, starty]})
+    this.setState({'hero': {'x': startx, 'y': starty, 'visible': true}})
+  }
+
+  handleKeyDown (e) {
+    if (e.keyCode > 36 && e.keyCode < 41) {
+      e.preventDefault()
+    }
+    let h = this.state.hero
+    if (e.keyCode === 37 && this.state.grid[h.y][h.x - 1] === 'open') {
+      this.setState({hero: {x: h.x - 1, y: h.y, visible: true}})
+    }
+    if (e.keyCode === 38 && this.state.grid[h.y - 1][h.x] === 'open') {
+      this.setState({hero: {x: h.x, y: h.y - 1, visible: true}})
+    }
+    if (e.keyCode === 39 && this.state.grid[h.y][h.x + 1] === 'open') {
+      this.setState({hero: {x: h.x + 1, y: h.y, visible: true}})
+    }
+    if (e.keyCode === 40 && this.state.grid[h.y + 1][h.x] === 'open') {
+      this.setState({hero: {x: h.x, y: h.y + 1, visible: true}})
+    }
   }
 
   componentDidMount () {
     this.generateDungeon()
+    window.addEventListener('keydown', this.handleKeyDown)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this.handleKeyDown)
   }
 
   render () {
@@ -189,12 +214,14 @@ export default class Dungeon extends React.Component {
               })
             })
           }
-          <circle
-            className='hero'
-            cx={this.state.hero[0] * 10 + 5}
-            cy={this.state.hero[1] * 10 + 5}
-            r='4'
-          />
+          {this.state.hero.visible &&
+            <circle
+              className='hero'
+              cx={this.state.hero.x * 10 + 5}
+              cy={this.state.hero.y * 10 + 5}
+              r='4'
+            />
+          }
         </svg>
       </div>
     )
