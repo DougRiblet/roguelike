@@ -12,3 +12,5 @@ svg {
       fill: navy; }
     svg rect.onopen {
       fill: papayawhip; }
+    svg rect.onhero {
+      fill: red; }

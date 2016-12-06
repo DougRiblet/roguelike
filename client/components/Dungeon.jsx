@@ -11,6 +11,7 @@ export default class Dungeon extends React.Component {
     this.generateDungeon = this.generateDungeon.bind(this)
     this.generateTunnel = this.generateTunnel.bind(this)
     this.generateRoom = this.generateRoom.bind(this)
+    this.placeHeroStart = this.placeHeroStart.bind(this)
   }
 
   generateDungeon () {
@@ -32,6 +33,8 @@ export default class Dungeon extends React.Component {
       this.generateTunnel(roomsSorted, tunnelPass)
       tunnelPass++
     }
+    // place hero in upper left room to start
+    this.placeHeroStart(roomsSorted[0])
 
     // change state to show new dungeon
     this.setState({grid: this.newDun})
@@ -157,6 +160,12 @@ export default class Dungeon extends React.Component {
         this.newDun[row][col] = 'open'
       }
     }
+  }
+
+  placeHeroStart (room) {
+    let startx = room.xc + Math.floor(Math.random() * room.xw)
+    let starty = room.yc + Math.floor(Math.random() * room.yh)
+    this.newDun[starty][startx] = 'hero'
   }
 
   componentDidMount () {
