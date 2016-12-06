@@ -5,7 +5,8 @@ export default class Dungeon extends React.Component {
     super(props)
     this.state = {
       grid: Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock')),
-      hero: {'visible': false}
+      hero: {'visible': false},
+      exit: {'visible': false}
     }
     this.newDun = Array.from({length: 60}, () => Array.from({length: 120}, () => 'rock'))
     this.rooms = []
@@ -39,6 +40,7 @@ export default class Dungeon extends React.Component {
     this.setState({grid: this.newDun})
     // place hero in upper left room to start
     this.placeHeroStart(roomsSorted[0])
+    this.placeExit(roomsSorted[roomsSorted.length - 1])
   }
 
   generateRoom (count) {
@@ -169,6 +171,16 @@ export default class Dungeon extends React.Component {
     this.setState({'hero': {'x': startx, 'y': starty, 'visible': true}})
   }
 
+  placeExit (room) {
+    let startx = room.xc + Math.floor(Math.random() * room.xw)
+    let starty = room.yc + Math.floor(Math.random() * room.yh)
+    this.setState({'exit': {'x': startx, 'y': starty, 'visible': true}})
+  }
+
+  // distributeItems () {
+
+  // }
+
   handleKeyDown (e) {
     if (e.keyCode > 36 && e.keyCode < 41) {
       e.preventDefault()
@@ -219,6 +231,14 @@ export default class Dungeon extends React.Component {
               className='hero'
               cx={this.state.hero.x * 10 + 5}
               cy={this.state.hero.y * 10 + 5}
+              r='4'
+            />
+          }
+          {this.state.exit.visible &&
+            <circle
+              className='exit'
+              cx={this.state.exit.x * 10 + 5}
+              cy={this.state.exit.y * 10 + 5}
               r='4'
             />
           }

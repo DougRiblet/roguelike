@@ -14,3 +14,5 @@ svg {
       fill: papayawhip; }
   svg circle.hero {
     fill: red; }
+  svg circle.exit {
+    fill: orange; }
