@@ -4,11 +4,11 @@ export default class Dungeon extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      grid: Array.from({length: 40}, () => Array.from({length: 80}, () => 'rock')),
+      grid: Array.from({length: 42}, () => Array.from({length: 84}, () => 'rock')),
       hero: {'visible': false},
       exit: {'visible': false}
     }
-    this.newDun = Array.from({length: 40}, () => Array.from({length: 80}, () => 'rock'))
+    this.newDun = Array.from({length: 42}, () => Array.from({length: 84}, () => 'rock'))
     this.rooms = []
     this.generateDungeon = this.generateDungeon.bind(this)
     this.generateTunnel = this.generateTunnel.bind(this)
@@ -19,7 +19,7 @@ export default class Dungeon extends React.Component {
 
   generateDungeon () {
     // reset newDun to solid rock
-    this.newDun = Array.from({length: 40}, () => Array.from({length: 80}, () => 'rock'))
+    this.newDun = Array.from({length: 42}, () => Array.from({length: 84}, () => 'rock'))
     this.rooms = []
     let count = 0
     // fill up blank dungeon with rooms
@@ -49,8 +49,8 @@ export default class Dungeon extends React.Component {
     let rw = sizemin + Math.floor(Math.random() * sizemin * 1.6)
     let rh = sizemin + Math.floor(Math.random() * sizemin * 1.3)
     // make Room position
-    let rx = Math.floor(Math.random() * (79 - rw))
-    let ry = Math.floor(Math.random() * (39 - rh))
+    let rx = Math.floor(Math.random() * (83 - rw))
+    let ry = Math.floor(Math.random() * (41 - rh))
     // check if position empty
     let empty = true
     for (let row = ry; row <= ry + rh; row++) {
