@@ -16,3 +16,9 @@ svg {
     fill: red; }
   svg circle.exit {
     fill: orange; }
+  svg circle.weapon {
+    fill: darkturquoise; }
+  svg circle.monster {
+    fill: darkviolet; }
+  svg circle.healthpack {
+    fill: green; }

@@ -6,10 +6,15 @@ export default class Dungeon extends React.Component {
     this.state = {
       grid: Array.from({length: 42}, () => Array.from({length: 84}, () => 'rock')),
       hero: {'visible': false},
-      exit: {'visible': false}
+      exit: {'visible': false},
+      weapon: {'visible': false},
+      monsters: [],
+      healthpacks: []
     }
     this.newDun = Array.from({length: 42}, () => Array.from({length: 84}, () => 'rock'))
     this.rooms = []
+    this.monsters = []
+    this.healthpacks = []
     this.generateDungeon = this.generateDungeon.bind(this)
     this.generateTunnel = this.generateTunnel.bind(this)
     this.generateRoom = this.generateRoom.bind(this)
@@ -38,6 +43,18 @@ export default class Dungeon extends React.Component {
     }
     // change state to show new dungeon
     this.setState({grid: this.newDun})
+    // scatter items and foes around the dungeon
+    let openSpots = []
+    for (let f = 1; f < roomsSorted.length - 1; f++) {
+      let r = roomsSorted[f]
+      for (let ry = r.yc + 1; ry < r.yc + r.yh - 2; ry++) {
+        for (let rx = r.xc + 1; rx < r.xc + r.xw - 2; rx++) {
+          openSpots.push({x: rx, y: ry})
+        }
+      }
+    }
+    this.distributeItems(openSpots)
+
     // place hero in upper left room to start
     this.placeHeroStart(roomsSorted[0])
     this.placeExit(roomsSorted[roomsSorted.length - 1])
@@ -177,9 +194,31 @@ export default class Dungeon extends React.Component {
     this.setState({'exit': {'x': startx, 'y': starty, 'visible': true}})
   }
 
-  // distributeItems () {
-
-  // }
+  distributeItems (openSpots) {
+    let monsterCount = 8
+    let healthCount = 14
+    while (monsterCount > 0) {
+      let index = Math.floor(Math.random() * openSpots.length)
+      let spot = openSpots[index]
+      this.monsters.push({'x': spot.x, 'y': spot.y})
+      openSpots.splice(index, 1)
+      monsterCount--
+    }
+    while (healthCount > 0) {
+      let index = Math.floor(Math.random() * openSpots.length)
+      let spot = openSpots[index]
+      this.healthpacks.push({'x': spot.x, 'y': spot.y})
+      openSpots.splice(index, 1)
+      healthCount--
+    }
+    let windex = Math.floor(Math.random() * openSpots.length)
+    let wspot = openSpots[windex]
+    this.setState({
+      'weapon': {'x': wspot.x, 'y': wspot.y, 'visible': true},
+      'healthpacks': this.healthpacks,
+      'monsters': this.monsters
+    })
+  }
 
   handleKeyDown (e) {
     if (e.keyCode > 36 && e.keyCode < 41) {
@@ -241,6 +280,38 @@ export default class Dungeon extends React.Component {
               cy={this.state.exit.y * 14 + 7}
               r='6'
             />
+          }
+          {this.state.weapon.visible &&
+            <circle
+              className='weapon'
+              cx={this.state.weapon.x * 14 + 7}
+              cy={this.state.weapon.y * 14 + 7}
+              r='6'
+            />
+          }
+          {
+            this.state.monsters.map((spot) => {
+              return (
+                <circle
+                  className='monster'
+                  cx={spot.x * 14 + 7}
+                  cy={spot.y * 14 + 7}
+                  r='6'
+                />
+              )
+            })
+          }
+          {
+            this.state.healthpacks.map((spot) => {
+              return (
+                <circle
+                  className='healthpack'
+                  cx={spot.x * 14 + 7}
+                  cy={spot.y * 14 + 7}
+                  r='6'
+                />
+              )
+            })
           }
         </svg>
       </div>
