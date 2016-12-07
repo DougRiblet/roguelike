@@ -172,8 +172,8 @@ export default class Dungeon extends React.Component {
   }
 
   placeExit (room) {
-    let startx = room.xc + Math.floor(Math.random() * room.xw)
-    let starty = room.yc + Math.floor(Math.random() * room.yh)
+    let startx = room.xc + 1 + Math.floor(Math.random() * (room.xw - 2))
+    let starty = room.yc + 1 + Math.floor(Math.random() * (room.yh - 2))
     this.setState({'exit': {'x': startx, 'y': starty, 'visible': true}})
   }
 
