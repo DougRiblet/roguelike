@@ -1,6 +1,13 @@
 body {
   background-color: navy;
-  color: ghostwhite; }
+  color: ghostwhite;
+  margin: 0px;
+  padding-top: 0px; }
+
+#statusBar {
+  width: 100%;
+  background-color: #666;
+  padding: 8px 40px; }
 
 svg {
   width: 1176px;

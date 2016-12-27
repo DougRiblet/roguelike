@@ -9,7 +9,7 @@ export default class Status extends React.Component {
   render () {
     return (
       <div>
-        <p>Status Bar</p>
+        Status Bar
       </div>
     )
   }
