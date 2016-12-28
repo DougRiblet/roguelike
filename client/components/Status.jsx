@@ -9,7 +9,12 @@ export default class Status extends React.Component {
   render () {
     return (
       <div>
-        Status Bar
+        <ul id="statusList">
+          <li>Health: {this.props.health}</li>
+          <li>Weapon: {this.props.weaponCurrent}</li>
+          <li>Prowess: {this.props.heroProwess}</li>
+          <li>Dungeon: {this.props.dungeonLevel}</li>
+        </ul>
       </div>
     )
   }

@@ -6,8 +6,18 @@ body {
 
 #statusBar {
   width: 100%;
-  background-color: #666;
-  padding: 8px 240px; }
+  background-color: #333;
+  padding: 8px 120px; }
+
+#statusList {
+  margin: 0px; }
+  #statusList li {
+    display: inline-block;
+    width: 200px;
+    margin-right: 40px;
+    font-family: Menlo, "Lucida Console", Courier, monospace;
+    font-size: 13px;
+    color: #c2c7cc; }
 
 #dungeon {
   padding: 10px;
