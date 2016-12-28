@@ -7,11 +7,16 @@ body {
 #statusBar {
   width: 100%;
   background-color: #666;
-  padding: 8px 40px; }
+  padding: 8px 240px; }
+
+#dungeon {
+  padding: 10px;
+  text-align: center; }
 
 svg {
   width: 1176px;
-  height: 588px; }
+  height: 588px;
+  margin: 2px auto; }
   svg rect {
     width: 14px;
     height: 14px; }
