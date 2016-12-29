@@ -267,14 +267,6 @@ export default class Dungeon extends React.Component {
               })
             })
           }
-          {this.state.hero.visible &&
-            <circle
-              className='hero'
-              cx={this.state.hero.x * 14 + 7}
-              cy={this.state.hero.y * 14 + 7}
-              r='6'
-            />
-          }
           {this.state.exit.visible &&
             <circle
               className='exit'
@@ -319,6 +311,15 @@ export default class Dungeon extends React.Component {
               )
             })
           }
+          {this.state.hero.visible &&
+            <circle
+              className='hero'
+              cx={this.state.hero.x * 14 + 7}
+              cy={this.state.hero.y * 14 + 7}
+              r='6'
+            />
+          }
+
         </svg>
       </div>
     )
