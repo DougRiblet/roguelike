@@ -293,9 +293,11 @@ export default class Dungeon extends React.Component {
           }
           {
             this.state.monsters.map((spot) => {
+              let keymon = 'monster_x' + spot.x + 'y' + spot.y
               return (
                 <circle
                   className='monster'
+                  key={keymon}
                   cx={spot.x * 14 + 7}
                   cy={spot.y * 14 + 7}
                   r='6'
@@ -305,9 +307,11 @@ export default class Dungeon extends React.Component {
           }
           {
             this.state.healthpacks.map((spot) => {
+              let keyhp = 'healthpack_x' + spot.x + 'y' + spot.y
               return (
                 <circle
                   className='healthpack'
+                  key={keyhp}
                   cx={spot.x * 14 + 7}
                   cy={spot.y * 14 + 7}
                   r='6'
