@@ -256,9 +256,11 @@ export default class Dungeon extends React.Component {
             this.state.grid.map((row, gy) => {
               return row.map((dot, gx) => {
                 let oxo = 'on' + String(dot)
+                let keyrect = 'x' + gx + 'y' + gy
                 return (
                   <rect
                     className={oxo}
+                    key={keyrect}
                     x={gx * 14} y={gy * 14}
                   />
                 )

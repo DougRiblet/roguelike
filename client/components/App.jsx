@@ -18,18 +18,18 @@ export default class App extends React.Component {
       <div className='app'>
         <div id='statusBar'>
           <Status
-            health = {this.state.health}
-            weaponCurrent = {this.state.weaponCurrent}
-            heroProwess = {this.state.heroProwess}
-            dungeonLevel = {this.state.dungeonLevel}
+            health={this.state.health}
+            weaponCurrent={this.state.weaponCurrent}
+            heroProwess={this.state.heroProwess}
+            dungeonLevel={this.state.dungeonLevel}
           />
         </div>
         <div id='dungeon'>
           <Dungeon
-            health = {this.state.health}
-            weaponCurrent = {this.state.weaponCurrent}
-            heroProwess = {this.state.heroProwess}
-            dungeonLevel = {this.state.dungeonLevel}
+            health={this.state.health}
+            weaponCurrent={this.state.weaponCurrent}
+            heroProwess={this.state.heroProwess}
+            dungeonLevel={this.state.dungeonLevel}
           />
         </div>
       </div>

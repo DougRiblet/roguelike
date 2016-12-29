@@ -9,7 +9,7 @@ export default class Status extends React.Component {
   render () {
     return (
       <div>
-        <ul id="statusList">
+        <ul id='statusList'>
           <li>Health: {this.props.health}</li>
           <li>Weapon: {this.props.weaponCurrent}</li>
           <li>Prowess: {this.props.heroProwess}</li>
