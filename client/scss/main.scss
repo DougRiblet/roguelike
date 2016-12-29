@@ -1,5 +1,5 @@
 body {
-  background-color: navy;
+  background-color: #66665e;
   color: ghostwhite;
   margin: 0px;
   padding-top: 0px;
@@ -41,6 +41,19 @@ svg {
     &.onopen {
       fill: papayawhip;
     }
+    &.maskRect {
+      width: 1176px;
+      height: 588px;
+      stroke: none;
+      fill: #66665e;
+      mask: url(#lightAroundHero);
+    }
+    &.anticandle {
+      width: 1176px;
+      height: 588px;
+      stroke: none;
+      fill: white;
+    }
   }
   circle {
     &.hero {
@@ -57,6 +70,10 @@ svg {
     }
     &.healthpack {
       fill: green;
+    }
+    &.candle {
+      stroke:none;
+      fill: black;
     }
   }
 }

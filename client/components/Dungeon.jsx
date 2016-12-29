@@ -319,7 +319,37 @@ export default class Dungeon extends React.Component {
               r='6'
             />
           }
-
+          {this.state.hero.visible &&
+            <defs>
+              <mask
+                id='lightAroundHero'
+                maskUnits='userSpaceOnUse'
+                x='0'
+                y='0'
+                width='1176'
+                height='588'
+              >
+                <rect
+                  className='anticandle'
+                  x='0'
+                  y='0'
+                />
+                <circle
+                  className='candle'
+                  cx={this.state.hero.x * 14 + 7}
+                  cy={this.state.hero.y * 14 + 7}
+                  r='50'
+                />
+              </mask>
+            </defs>
+          }
+          {this.state.hero.visible &&
+            <rect
+              x='0'
+              y='0'
+              className='maskRect'
+            />
+          }
         </svg>
       </div>
     )
