@@ -226,7 +226,15 @@ export default class Dungeon extends React.Component {
     }
     let h = this.state.hero
     if (e.keyCode === 37 && this.state.grid[h.y][h.x - 1] === 'open') {
-      this.setState({hero: {x: h.x - 1, y: h.y, visible: true}})
+      if (this.state.weapon.x === h.x - 1 && this.state.weapon.y === h.y) {
+        this.props.upgradeWeapon(this.props.dungeonLevel)
+        this.setState({
+          hero: {x: h.x - 1, y: h.y, visible: true},
+          weapon: {x: 0, y: 0, visible: false}
+        })
+      } else {
+        this.setState({hero: {x: h.x - 1, y: h.y, visible: true}})
+      }
     }
     if (e.keyCode === 38 && this.state.grid[h.y - 1][h.x] === 'open') {
       this.setState({hero: {x: h.x, y: h.y - 1, visible: true}})
@@ -338,7 +346,7 @@ export default class Dungeon extends React.Component {
                   className='candle'
                   cx={this.state.hero.x * 14 + 7}
                   cy={this.state.hero.y * 14 + 7}
-                  r='50'
+                  r='100'
                 />
               </mask>
             </defs>

@@ -7,10 +7,22 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       health: 100,
-      weaponCurrent: 'stick',
+      weaponCurrent: {name: 'stick', power: 10},
       heroProwess: 1,
       dungeonLevel: 1
     }
+    this.upgradeWeapon = this.upgradeWeapon.bind(this)
+  }
+
+  upgradeWeapon (dLevel) {
+    let weaponCache = [
+      {name: 'stick', power: 10},
+      {name: 'knife', power: 20},
+      {name: 'mace', power: 30},
+      {name: 'sword', power: 40},
+      {name: 'shotgun', power: 50}
+    ]
+    this.setState({weaponCurrent: weaponCache[dLevel]})
   }
 
   render () {
@@ -30,6 +42,7 @@ export default class App extends React.Component {
             weaponCurrent={this.state.weaponCurrent}
             heroProwess={this.state.heroProwess}
             dungeonLevel={this.state.dungeonLevel}
+            upgradeWeapon={(dLevel) => this.upgradeWeapon(dLevel)}
           />
         </div>
       </div>
