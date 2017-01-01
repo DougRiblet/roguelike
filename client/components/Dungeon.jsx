@@ -237,13 +237,37 @@ export default class Dungeon extends React.Component {
       }
     }
     if (e.keyCode === 38 && this.state.grid[h.y - 1][h.x] === 'open') {
-      this.setState({hero: {x: h.x, y: h.y - 1, visible: true}})
+      if (this.state.weapon.x === h.x && this.state.weapon.y === h.y - 1) {
+        this.props.upgradeWeapon(this.props.dungeonLevel)
+        this.setState({
+          hero: {x: h.x, y: h.y - 1, visible: true},
+          weapon: {x: 0, y: 0, visible: false}
+        })
+      } else {
+        this.setState({hero: {x: h.x, y: h.y - 1, visible: true}})
+      }
     }
     if (e.keyCode === 39 && this.state.grid[h.y][h.x + 1] === 'open') {
-      this.setState({hero: {x: h.x + 1, y: h.y, visible: true}})
+      if (this.state.weapon.x === h.x + 1 && this.state.weapon.y === h.y) {
+        this.props.upgradeWeapon(this.props.dungeonLevel)
+        this.setState({
+          hero: {x: h.x + 1, y: h.y, visible: true},
+          weapon: {x: 0, y: 0, visible: false}
+        })
+      } else {
+        this.setState({hero: {x: h.x + 1, y: h.y, visible: true}})
+      }
     }
     if (e.keyCode === 40 && this.state.grid[h.y + 1][h.x] === 'open') {
-      this.setState({hero: {x: h.x, y: h.y + 1, visible: true}})
+      if (this.state.weapon.x === h.x && this.state.weapon.y === h.y + 1) {
+        this.props.upgradeWeapon(this.props.dungeonLevel)
+        this.setState({
+          hero: {x: h.x, y: h.y + 1, visible: true},
+          weapon: {x: 0, y: 0, visible: false}
+        })
+      } else {
+        this.setState({hero: {x: h.x, y: h.y + 1, visible: true}})
+      }
     }
   }
 
