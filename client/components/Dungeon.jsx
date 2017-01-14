@@ -12,57 +12,6 @@ export default class Dungeon extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
-  handleKeyDown (e) {
-    if (e.keyCode > 36 && e.keyCode < 41) {
-      e.preventDefault()
-    }
-    let h = this.state.hero
-    if (e.keyCode === 37 && this.state.grid[h.y][h.x - 1] === 'open') {
-      if (this.state.weapon.x === h.x - 1 && this.state.weapon.y === h.y) {
-        this.props.upgradeWeapon(this.props.dungeonLevel)
-        this.setState({
-          hero: {x: h.x - 1, y: h.y, visible: true},
-          weapon: {visible: false}
-        })
-      } else {
-        this.setState({hero: {x: h.x - 1, y: h.y, visible: true}})
-      }
-    }
-    if (e.keyCode === 38 && this.state.grid[h.y - 1][h.x] === 'open') {
-      if (this.state.weapon.x === h.x && this.state.weapon.y === h.y - 1) {
-        this.props.upgradeWeapon(this.props.dungeonLevel)
-        this.setState({
-          hero: {x: h.x, y: h.y - 1, visible: true},
-          weapon: {x: 0, y: 0, visible: false}
-        })
-      } else {
-        this.setState({hero: {x: h.x, y: h.y - 1, visible: true}})
-      }
-    }
-    if (e.keyCode === 39 && this.state.grid[h.y][h.x + 1] === 'open') {
-      if (this.state.weapon.x === h.x + 1 && this.state.weapon.y === h.y) {
-        this.props.upgradeWeapon(this.props.dungeonLevel)
-        this.setState({
-          hero: {x: h.x + 1, y: h.y, visible: true},
-          weapon: {x: 0, y: 0, visible: false}
-        })
-      } else {
-        this.setState({hero: {x: h.x + 1, y: h.y, visible: true}})
-      }
-    }
-    if (e.keyCode === 40 && this.state.grid[h.y + 1][h.x] === 'open') {
-      if (this.state.weapon.x === h.x && this.state.weapon.y === h.y + 1) {
-        this.props.upgradeWeapon(this.props.dungeonLevel)
-        this.setState({
-          hero: {x: h.x, y: h.y + 1, visible: true},
-          weapon: {x: 0, y: 0, visible: false}
-        })
-      } else {
-        this.setState({hero: {x: h.x, y: h.y + 1, visible: true}})
-      }
-    }
-  }
-
   componentDidMount () {
     let newDun = generateDungeon()
     this.setState({
@@ -75,6 +24,50 @@ export default class Dungeon extends React.Component {
 
   componentWillUnmount () {
     window.removeEventListener('keydown', this.handleKeyDown)
+  }
+
+  handleItemContact (item) {
+    console.log('hit item: ', item.type)
+    this.setState({hero: {x: item.x, y: item.y, visible: true}})
+  }
+
+  handleKeyDown (e) {
+    if (e.keyCode > 36 && e.keyCode < 41) {
+      e.preventDefault()
+    }
+    let h = this.state.hero
+    if (e.keyCode === 37 && this.state.grid[h.y][h.x - 1] === 'open') {
+      let ranIntoItem = this.state.items.find(item => item.y === h.y && item.x === h.x - 1)
+      if (ranIntoItem) {
+        this.handleItemContact(ranIntoItem)
+      } else {
+        this.setState({hero: {x: h.x - 1, y: h.y, visible: true}})
+      }
+    }
+    if (e.keyCode === 38 && this.state.grid[h.y - 1][h.x] === 'open') {
+      let ranIntoItem = this.state.items.find(item => item.y === h.y - 1 && item.x === h.x)
+      if (ranIntoItem) {
+        this.handleItemContact(ranIntoItem)
+      } else {
+        this.setState({hero: {x: h.x, y: h.y - 1, visible: true}})
+      }
+    }
+    if (e.keyCode === 39 && this.state.grid[h.y][h.x + 1] === 'open') {
+      let ranIntoItem = this.state.items.find(item => item.y === h.y && item.x === h.x + 1)
+      if (ranIntoItem) {
+        this.handleItemContact(ranIntoItem)
+      } else {
+        this.setState({hero: {x: h.x + 1, y: h.y, visible: true}})
+      }
+    }
+    if (e.keyCode === 40 && this.state.grid[h.y + 1][h.x] === 'open') {
+      let ranIntoItem = this.state.items.find(item => item.y === h.y + 1 && item.x === h.x)
+      if (ranIntoItem) {
+        this.handleItemContact(ranIntoItem)
+      } else {
+        this.setState({hero: {x: h.x, y: h.y + 1, visible: true}})
+      }
+    }
   }
 
   render () {
