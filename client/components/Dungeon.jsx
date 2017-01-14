@@ -10,6 +10,7 @@ export default class Dungeon extends React.Component {
       items: []
     }
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleItemContact = this.handleItemContact.bind(this)
   }
 
   componentDidMount () {
@@ -27,8 +28,15 @@ export default class Dungeon extends React.Component {
   }
 
   handleItemContact (item) {
-    console.log('hit item: ', item.type)
-    this.setState({hero: {x: item.x, y: item.y, visible: true}})
+    if (item.type === 'weapon') {
+      this.props.upgradeWeapon(this.props.dungeonLevel)
+      let itemsRevised = this.state.items.filter(i => i !== item)
+      this.setState({
+        hero: {x: item.x, y: item.y, visible: true},
+        items: itemsRevised
+      })
+    }
+//    this.setState({hero: {x: item.x, y: item.y, visible: true}})
   }
 
   handleKeyDown (e) {
