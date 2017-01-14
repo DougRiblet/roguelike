@@ -177,7 +177,7 @@ const distributeItems = (openSpots, finalRoom) => {
   while (monsterCount > 0) {
     let index = Math.floor(Math.random() * openSpots.length)
     let spot = openSpots[index]
-    itemFillup.push({'type': 'monster', 'x': spot.x, 'y': spot.y})
+    itemFillup.push({'type': 'monster', 'x': spot.x, 'y': spot.y, 'health': 50, 'damage': 30})
     openSpots.splice(index, 1)
     monsterCount--
   }

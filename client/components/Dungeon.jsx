@@ -11,6 +11,7 @@ export default class Dungeon extends React.Component {
     }
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleItemContact = this.handleItemContact.bind(this)
+    this.handleCombat = this.handleCombat.bind(this)
   }
 
   componentDidMount () {
@@ -27,7 +28,25 @@ export default class Dungeon extends React.Component {
     window.removeEventListener('keydown', this.handleKeyDown)
   }
 
-  handleItemContact (item) {
+  handleCombat (monster, hero) {
+    let newMonsterHealth = monster.health - this.props.weaponCurrent.power
+    let newHeroHealth = this.props.health - monster.damage
+    if (newHeroHealth < 1) {
+      console.log('game over')
+    } else if (newMonsterHealth < 1) {
+      console.log('monster vanquished')
+      let itemsRevised = this.state.items.filter(i => i !== monster)
+      this.setState({items: itemsRevised})
+      this.props.addHealth(monster.damage)
+    } else {
+      let itemsRevised = this.state.items.filter(i => i !== monster)
+      this.props.addHealth(-monster.damage)
+      monster.health = newMonsterHealth
+      this.setState({items: itemsRevised.concat(monster)})
+    }
+  }
+
+  handleItemContact (item, hero) {
     if (item.type === 'weapon') {
       this.props.upgradeWeapon(this.props.dungeonLevel)
       let itemsRevised = this.state.items.filter(i => i !== item)
@@ -36,12 +55,14 @@ export default class Dungeon extends React.Component {
         items: itemsRevised
       })
     } else if (item.type === 'healthpack') {
-      this.props.addHealth()
+      this.props.addHealth(20)
       let itemsRevised = this.state.items.filter(i => i !== item)
       this.setState({
         hero: {x: item.x, y: item.y, visible: true},
         items: itemsRevised
       })
+    } else if (item.type === 'monster') {
+      this.handleCombat(item, hero)
     }
 //    this.setState({hero: {x: item.x, y: item.y, visible: true}})
   }
@@ -54,7 +75,7 @@ export default class Dungeon extends React.Component {
     if (e.keyCode === 37 && this.state.grid[h.y][h.x - 1] === 'open') {
       let ranIntoItem = this.state.items.find(item => item.y === h.y && item.x === h.x - 1)
       if (ranIntoItem) {
-        this.handleItemContact(ranIntoItem)
+        this.handleItemContact(ranIntoItem, h)
       } else {
         this.setState({hero: {x: h.x - 1, y: h.y, visible: true}})
       }
@@ -62,7 +83,7 @@ export default class Dungeon extends React.Component {
     if (e.keyCode === 38 && this.state.grid[h.y - 1][h.x] === 'open') {
       let ranIntoItem = this.state.items.find(item => item.y === h.y - 1 && item.x === h.x)
       if (ranIntoItem) {
-        this.handleItemContact(ranIntoItem)
+        this.handleItemContact(ranIntoItem, h)
       } else {
         this.setState({hero: {x: h.x, y: h.y - 1, visible: true}})
       }
@@ -70,7 +91,7 @@ export default class Dungeon extends React.Component {
     if (e.keyCode === 39 && this.state.grid[h.y][h.x + 1] === 'open') {
       let ranIntoItem = this.state.items.find(item => item.y === h.y && item.x === h.x + 1)
       if (ranIntoItem) {
-        this.handleItemContact(ranIntoItem)
+        this.handleItemContact(ranIntoItem, h)
       } else {
         this.setState({hero: {x: h.x + 1, y: h.y, visible: true}})
       }
@@ -78,7 +99,7 @@ export default class Dungeon extends React.Component {
     if (e.keyCode === 40 && this.state.grid[h.y + 1][h.x] === 'open') {
       let ranIntoItem = this.state.items.find(item => item.y === h.y + 1 && item.x === h.x)
       if (ranIntoItem) {
-        this.handleItemContact(ranIntoItem)
+        this.handleItemContact(ranIntoItem, h)
       } else {
         this.setState({hero: {x: h.x, y: h.y + 1, visible: true}})
       }

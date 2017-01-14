@@ -26,8 +26,8 @@ export default class App extends React.Component {
     this.setState({weaponCurrent: weaponCache[dLevel]})
   }
 
-  addHealth () {
-    let newHealth = this.state.health + 20
+  addHealth (num) {
+    let newHealth = this.state.health + num
     this.setState({health: newHealth})
   }
 
@@ -49,7 +49,7 @@ export default class App extends React.Component {
             heroProwess={this.state.heroProwess}
             dungeonLevel={this.state.dungeonLevel}
             upgradeWeapon={(dLevel) => this.upgradeWeapon(dLevel)}
-            addHealth={() => this.addHealth()}
+            addHealth={(num) => this.addHealth(num)}
           />
         </div>
       </div>
