@@ -35,6 +35,13 @@ export default class Dungeon extends React.Component {
         hero: {x: item.x, y: item.y, visible: true},
         items: itemsRevised
       })
+    } else if (item.type === 'healthpack') {
+      this.props.addHealth()
+      let itemsRevised = this.state.items.filter(i => i !== item)
+      this.setState({
+        hero: {x: item.x, y: item.y, visible: true},
+        items: itemsRevised
+      })
     }
 //    this.setState({hero: {x: item.x, y: item.y, visible: true}})
   }
