@@ -13,6 +13,7 @@ export default class App extends React.Component {
     }
     this.upgradeWeapon = this.upgradeWeapon.bind(this)
     this.addHealth = this.addHealth.bind(this)
+    this.moveToNextDungeon = this.moveToNextDungeon.bind(this)
   }
 
   upgradeWeapon (dLevel) {
@@ -29,6 +30,11 @@ export default class App extends React.Component {
   addHealth (num) {
     let newHealth = this.state.health + num
     this.setState({health: newHealth})
+  }
+
+  moveToNextDungeon () {
+    let dunPlusOne = this.state.dungeonLevel + 1
+    this.setState({dungeonLevel: dunPlusOne})
   }
 
   render () {
@@ -50,6 +56,7 @@ export default class App extends React.Component {
             dungeonLevel={this.state.dungeonLevel}
             upgradeWeapon={(dLevel) => this.upgradeWeapon(dLevel)}
             addHealth={(num) => this.addHealth(num)}
+            moveToNextDungeon={() => this.moveToNextDungeon()}
           />
         </div>
       </div>

@@ -15,7 +15,7 @@ export default class Dungeon extends React.Component {
   }
 
   componentDidMount () {
-    let newDun = generateDungeon()
+    let newDun = generateDungeon(this.props.dungeonLevel)
     this.setState({
       hero: newDun.hero,
       grid: newDun.grid,
@@ -63,6 +63,14 @@ export default class Dungeon extends React.Component {
       })
     } else if (item.type === 'monster') {
       this.handleCombat(item, hero)
+    } else if (item.type === 'exit') {
+      this.props.moveToNextDungeon()
+      let newDun = generateDungeon(this.props.dungeonLevel)
+      this.setState({
+        hero: newDun.hero,
+        grid: newDun.grid,
+        items: newDun.items
+      })
     }
 //    this.setState({hero: {x: item.x, y: item.y, visible: true}})
   }
