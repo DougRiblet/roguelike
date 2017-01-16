@@ -53,6 +53,8 @@ svg {
     fill: darkturquoise; }
   svg circle.monster {
     fill: darkviolet; }
+  svg circle.boss {
+    fill: darkviolet; }
   svg circle.healthpack {
     fill: green; }
   svg circle.candle {

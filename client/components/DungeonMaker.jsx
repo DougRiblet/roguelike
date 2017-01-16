@@ -32,7 +32,7 @@ const generateDungeon = (dLevel) => {
       }
     }
   }
-  distributeItems(openSpots, roomsSorted[roomsSorted.length - 1])
+  distributeItems(openSpots, roomsSorted[roomsSorted.length - 1], dLevel)
   // place hero in upper left room to start
   placeHeroStart(roomsSorted[0])
   return {
@@ -170,7 +170,7 @@ const placeHeroStart = (room) => {
   newHero = {'x': startx, 'y': starty, 'visible': true}
 }
 
-const distributeItems = (openSpots, finalRoom) => {
+const distributeItems = (openSpots, finalRoom, dLevel) => {
   let monsterCount = 8
   let healthCount = 14
   let itemFillup = []
@@ -188,12 +188,18 @@ const distributeItems = (openSpots, finalRoom) => {
     openSpots.splice(index, 1)
     healthCount--
   }
+  // place weapon near beginning of level
   let windex = Math.floor(Math.random() * openSpots.length / 4)
   let wspot = openSpots[windex]
   itemFillup.push({'type': 'weapon', 'x': wspot.x, 'y': wspot.y})
+  // place exit or boss in final room, ie lower right corner
   let ex = finalRoom.xc + 1 + Math.floor(Math.random() * (finalRoom.xw - 2))
   let ey = finalRoom.yc + 1 + Math.floor(Math.random() * (finalRoom.yh - 2))
-  itemFillup.push({'type': 'exit', 'x': ex, 'y': ey})
+  if (dLevel < 4) {
+    itemFillup.push({'type': 'exit', 'x': ex, 'y': ey})
+  } else {
+    itemFillup.push({'type': 'boss', 'x': ex, 'y': ey, 'health': 100, 'damage': 20})
+  }
   newItems = itemFillup
 }
 

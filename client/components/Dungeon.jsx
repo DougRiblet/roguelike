@@ -32,13 +32,20 @@ export default class Dungeon extends React.Component {
     let newMonsterHealth = monster.health - this.props.weaponCurrent.power
     let newHeroHealth = this.props.health - monster.damage
     if (newHeroHealth < 1) {
-      console.log('game over')
+      console.log('game over, you lose')
     } else if (newMonsterHealth < 1) {
-      console.log('monster vanquished')
-      let itemsRevised = this.state.items.filter(i => i !== monster)
-      this.setState({items: itemsRevised})
-      this.props.addHealth(monster.damage)
+      if (monster.type === 'boss') {
+        console.log('game over, you win')
+        let itemsRevised = this.state.items.filter(i => i !== monster)
+        this.setState({items: itemsRevised})
+      } else {
+        console.log('monster vanquished')
+        let itemsRevised = this.state.items.filter(i => i !== monster)
+        this.setState({items: itemsRevised})
+        this.props.addHealth(monster.damage)
+      }
     } else {
+      console.log('the battle continues')
       let itemsRevised = this.state.items.filter(i => i !== monster)
       this.props.addHealth(-monster.damage)
       monster.health = newMonsterHealth
@@ -61,7 +68,7 @@ export default class Dungeon extends React.Component {
         hero: {x: item.x, y: item.y, visible: true},
         items: itemsRevised
       })
-    } else if (item.type === 'monster') {
+    } else if (item.type === 'monster' || item.type === 'boss') {
       this.handleCombat(item, hero)
     } else if (item.type === 'exit') {
       this.props.moveToNextDungeon()
