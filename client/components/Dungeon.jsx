@@ -7,25 +7,33 @@ export default class Dungeon extends React.Component {
     this.state = {
       grid: Array.from({length: 42}, () => Array.from({length: 84}, () => 'rock')),
       hero: {'visible': false},
-      items: []
+      items: [],
+      candle: 'candledark'
     }
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleItemContact = this.handleItemContact.bind(this)
     this.handleCombat = this.handleCombat.bind(this)
+    this.makeNewDungeon = this.makeNewDungeon.bind(this)
   }
 
   componentDidMount () {
-    let newDun = generateDungeon(this.props.dungeonLevel)
-    this.setState({
-      hero: newDun.hero,
-      grid: newDun.grid,
-      items: newDun.items
-    })
+    this.makeNewDungeon()
     window.addEventListener('keydown', this.handleKeyDown)
   }
 
   componentWillUnmount () {
     window.removeEventListener('keydown', this.handleKeyDown)
+  }
+
+  makeNewDungeon () {
+    let newDun = generateDungeon(this.props.dungeonLevel)
+    this.setState({
+      hero: newDun.hero,
+      grid: newDun.grid,
+      items: newDun.items,
+      candle: 'candlelight'
+    })
+
   }
 
   handleCombat (monster, hero) {
@@ -72,15 +80,11 @@ export default class Dungeon extends React.Component {
     } else if (item.type === 'monster' || item.type === 'boss') {
       this.handleCombat(item, hero)
     } else if (item.type === 'exit') {
+      this.setState({candle: 'candledark'})
       this.props.moveToNextDungeon()
-      let newDun = generateDungeon(this.props.dungeonLevel)
-      this.setState({
-        hero: newDun.hero,
-        grid: newDun.grid,
-        items: newDun.items
-      })
+      
+      this.makeNewDungeon()
     }
-//    this.setState({hero: {x: item.x, y: item.y, visible: true}})
   }
 
   handleKeyDown (e) {

@@ -60,8 +60,10 @@ svg {
   svg circle.candlelight {
     stroke: none;
     fill: black;
-    opacity: 1; }
+    opacity: 1;
+    transition: opacity 2s; }
   svg circle.candledark {
     stroke: none;
     fill: black;
-    opacity: 0; }
+    opacity: 0;
+    transition: opacity 2s; }
