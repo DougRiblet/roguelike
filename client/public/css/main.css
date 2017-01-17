@@ -59,4 +59,5 @@ svg {
     fill: green; }
   svg circle.candle {
     stroke: none;
-    fill: black; }
+    fill: black;
+    opacity: 1; }
