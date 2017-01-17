@@ -35,7 +35,7 @@ export default class Dungeon extends React.Component {
       items: newDun.items,
       candle: 'candledark'
     })
-    setTimeout(this.fadeInCandle, 1000)
+    setTimeout(this.fadeInCandle, 100)
   }
 
   fadeInCandle () {
@@ -54,10 +54,13 @@ export default class Dungeon extends React.Component {
     let newMonsterHealth = monster.health - this.props.weaponCurrent.power
     let newHeroHealth = this.props.health - monster.damage
     if (newHeroHealth < 1) {
-      console.log('game over, you lose')
+      this.fadeOutCandle()
+      this.props.openModal(0)
+      this.props.resetValuesForNewGame()
+      setTimeout(this.makeNewDungeon, 2200)
     } else if (newMonsterHealth < 1) {
       if (monster.type === 'boss') {
-        console.log('game over, you win')
+        this.props.openModal(1)
         let itemsRevised = this.state.items.filter(i => i !== monster)
         this.setState({items: itemsRevised})
       } else {

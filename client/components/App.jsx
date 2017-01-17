@@ -3,14 +3,14 @@ import Status from './Status'
 import Dungeon from './Dungeon'
 import Modal from 'react-modal'
 
-const customStyle = {
+const customModalStyle = {
   overlay: {
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.35)'
+    backgroundColor: 'rgba(255, 255, 255, 0.5)'
   },
   content: {
     position: 'absolute',
@@ -18,7 +18,7 @@ const customStyle = {
     left: '30%',
     right: 'auto',
     bottom: 'auto',
-    width: '300px',
+    width: '400px',
     border: '1px solid #ccc',
     background: '#fff',
     color: '#333',
@@ -41,12 +41,13 @@ export default class App extends React.Component {
       monstersKilled: 0,
       dungeonLevel: 1,
       modalIsOpen: true,
-      modalMessage: 'Test Message!!!!!!!',
+      modalMessage: 'SUZU: A ROGUELIKE',
       modalButtonText: 'Enter the Dungeon'
     }
     this.upgradeWeapon = this.upgradeWeapon.bind(this)
     this.addHealth = this.addHealth.bind(this)
     this.moveToNextDungeon = this.moveToNextDungeon.bind(this)
+    this.resetValuesForNewGame = this.resetValuesForNewGame.bind(this)
     this.logMonsterKill = this.logMonsterKill.bind(this)
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
@@ -79,8 +80,23 @@ export default class App extends React.Component {
     this.setState({dungeonLevel: dunPlusOne})
   }
 
-  openModal (message) {
-    this.setState({modalIsOpen: true, modalMessage: message})
+  resetValuesForNewGame () {
+    this.setState({
+      health: 100,
+      weaponCurrent: {name: 'stick', power: 10},
+      heroProwess: 1,
+      monstersKilled: 0,
+      dungeonLevel: 1
+    })
+  }
+
+  openModal (num) {
+    let mHead = ['Game Over, You Lose', 'Game Over, You Win']
+    this.setState({
+      modalIsOpen: true,
+      modalMessage: mHead[num],
+      modalButtonText: 'Start New Game'
+    })
   }
 
   closeModal () {
@@ -101,11 +117,11 @@ export default class App extends React.Component {
         <div id='modalDiv'>
           <Modal
             isOpen={this.state.modalIsOpen}
-            style={customStyle}
+            style={customModalStyle}
             contentLabel='Modal'
           >
-            <h2>{this.state.modalMessage}</h2>
-            <button onClick={this.closeModal}>
+            <h2 className='modalH2'>{this.state.modalMessage}</h2>
+            <button onClick={this.closeModal} className='modalButton'>
               {this.state.modalButtonText}
             </button>
           </Modal>
@@ -120,6 +136,9 @@ export default class App extends React.Component {
             addHealth={(num) => this.addHealth(num)}
             moveToNextDungeon={() => this.moveToNextDungeon()}
             logMonsterKill={() => this.logMonsterKill()}
+            openModal={(num) => this.openModal(num)}
+            closeModal={() => this.closeModal()}
+            resetValuesForNewGame={() => this.resetValuesForNewGame()}
           />
         </div>
       </div>
