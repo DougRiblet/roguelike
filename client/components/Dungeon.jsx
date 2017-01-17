@@ -14,6 +14,8 @@ export default class Dungeon extends React.Component {
     this.handleItemContact = this.handleItemContact.bind(this)
     this.handleCombat = this.handleCombat.bind(this)
     this.makeNewDungeon = this.makeNewDungeon.bind(this)
+    this.fadeInCandle = this.fadeInCandle.bind(this)
+    this.fadeOutCandle = this.fadeOutCandle.bind(this)
   }
 
   componentDidMount () {
@@ -31,9 +33,21 @@ export default class Dungeon extends React.Component {
       hero: newDun.hero,
       grid: newDun.grid,
       items: newDun.items,
+      candle: 'candledark'
+    })
+    setTimeout(this.fadeInCandle, 1000)
+  }
+
+  fadeInCandle () {
+    this.setState({
       candle: 'candlelight'
     })
+  }
 
+  fadeOutCandle () {
+    this.setState({
+      candle: 'candledark'
+    })
   }
 
   handleCombat (monster, hero) {
@@ -80,10 +94,9 @@ export default class Dungeon extends React.Component {
     } else if (item.type === 'monster' || item.type === 'boss') {
       this.handleCombat(item, hero)
     } else if (item.type === 'exit') {
-      this.setState({candle: 'candledark'})
+      this.fadeOutCandle()
       this.props.moveToNextDungeon()
-      
-      this.makeNewDungeon()
+      setTimeout(this.makeNewDungeon, 2500)
     }
   }
 
@@ -183,10 +196,10 @@ export default class Dungeon extends React.Component {
                   y='0'
                 />
                 <circle
-                  className='candle'
+                  className={this.state.candle}
                   cx={this.state.hero.x * 14 + 7}
                   cy={this.state.hero.y * 14 + 7}
-                  r='100'
+                  r='84'
                 />
               </mask>
             </defs>
