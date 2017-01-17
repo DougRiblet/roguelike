@@ -57,7 +57,11 @@ svg {
     fill: darkviolet; }
   svg circle.healthpack {
     fill: green; }
-  svg circle.candle {
+  svg circle.candlelight {
     stroke: none;
     fill: black;
     opacity: 1; }
+  svg circle.candledark {
+    stroke: none;
+    fill: black;
+    opacity: 0; }

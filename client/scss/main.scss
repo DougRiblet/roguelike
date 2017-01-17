@@ -74,10 +74,15 @@ svg {
     &.healthpack {
       fill: green;
     }
-    &.candle {
+    &.candlelight {
       stroke:none;
       fill: black;
       opacity: 1;
+    }
+    &.candledark {
+      stroke:none;
+      fill: black;
+      opacity: 0;
     }
   }
 }
