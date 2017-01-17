@@ -9,11 +9,13 @@ export default class App extends React.Component {
       health: 100,
       weaponCurrent: {name: 'stick', power: 10},
       heroProwess: 1,
+      monstersKilled: 0,
       dungeonLevel: 1
     }
     this.upgradeWeapon = this.upgradeWeapon.bind(this)
     this.addHealth = this.addHealth.bind(this)
     this.moveToNextDungeon = this.moveToNextDungeon.bind(this)
+    this.logMonsterKill = this.logMonsterKill.bind(this)
   }
 
   upgradeWeapon (dLevel) {
@@ -30,6 +32,12 @@ export default class App extends React.Component {
   addHealth (num) {
     let newHealth = this.state.health + num
     this.setState({health: newHealth})
+  }
+
+  logMonsterKill () {
+    let newMK = this.state.monstersKilled + 1
+    let newHP = 1 + Math.floor(newMK / 6)
+    this.setState({monstersKilled: newMK, heroProwess: newHP})
   }
 
   moveToNextDungeon () {
@@ -57,6 +65,7 @@ export default class App extends React.Component {
             upgradeWeapon={(dLevel) => this.upgradeWeapon(dLevel)}
             addHealth={(num) => this.addHealth(num)}
             moveToNextDungeon={() => this.moveToNextDungeon()}
+            logMonsterKill={() => this.logMonsterKill()}
           />
         </div>
       </div>

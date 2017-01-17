@@ -42,6 +42,7 @@ export default class Dungeon extends React.Component {
         console.log('monster vanquished')
         let itemsRevised = this.state.items.filter(i => i !== monster)
         this.setState({items: itemsRevised})
+        this.props.logMonsterKill()
         this.props.addHealth(monster.damage)
       }
     } else {
