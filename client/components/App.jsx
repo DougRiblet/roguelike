@@ -3,6 +3,34 @@ import Status from './Status'
 import Dungeon from './Dungeon'
 import Modal from 'react-modal'
 
+const customStyle = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.35)'
+  },
+  content: {
+    position: 'absolute',
+    top: '120px',
+    left: '30%',
+    right: 'auto',
+    bottom: 'auto',
+    width: '300px',
+    border: '1px solid #ccc',
+    background: '#fff',
+    color: '#333',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    borderRadius: '4px',
+    outline: 'none',
+    padding: '20px'
+
+  }
+}
+
 export default class App extends React.Component {
   constructor (props) {
     super(props)
@@ -12,7 +40,9 @@ export default class App extends React.Component {
       heroProwess: 1,
       monstersKilled: 0,
       dungeonLevel: 1,
-      modalIsOpen: false
+      modalIsOpen: true,
+      modalMessage: 'Test Message!!!!!!!',
+      modalButtonText: 'Enter the Dungeon'
     }
     this.upgradeWeapon = this.upgradeWeapon.bind(this)
     this.addHealth = this.addHealth.bind(this)
@@ -49,8 +79,8 @@ export default class App extends React.Component {
     this.setState({dungeonLevel: dunPlusOne})
   }
 
-  openModal () {
-    this.setState({modalIsOpen: true})
+  openModal (message) {
+    this.setState({modalIsOpen: true, modalMessage: message})
   }
 
   closeModal () {
@@ -67,6 +97,18 @@ export default class App extends React.Component {
             heroProwess={this.state.heroProwess}
             dungeonLevel={this.state.dungeonLevel}
           />
+        </div>
+        <div id='modalDiv'>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            style={customStyle}
+            contentLabel='Modal'
+          >
+            <h2>{this.state.modalMessage}</h2>
+            <button onClick={this.closeModal}>
+              {this.state.modalButtonText}
+            </button>
+          </Modal>
         </div>
         <div id='dungeon'>
           <Dungeon
