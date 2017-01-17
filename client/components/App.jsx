@@ -1,6 +1,7 @@
 import React from 'react'
 import Status from './Status'
 import Dungeon from './Dungeon'
+import Modal from 'react-modal'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -10,12 +11,15 @@ export default class App extends React.Component {
       weaponCurrent: {name: 'stick', power: 10},
       heroProwess: 1,
       monstersKilled: 0,
-      dungeonLevel: 1
+      dungeonLevel: 1,
+      modalIsOpen: false
     }
     this.upgradeWeapon = this.upgradeWeapon.bind(this)
     this.addHealth = this.addHealth.bind(this)
     this.moveToNextDungeon = this.moveToNextDungeon.bind(this)
     this.logMonsterKill = this.logMonsterKill.bind(this)
+    this.openModal = this.openModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
 
   upgradeWeapon (dLevel) {
@@ -43,6 +47,14 @@ export default class App extends React.Component {
   moveToNextDungeon () {
     let dunPlusOne = this.state.dungeonLevel + 1
     this.setState({dungeonLevel: dunPlusOne})
+  }
+
+  openModal () {
+    this.setState({modalIsOpen: true})
+  }
+
+  closeModal () {
+    this.setState({modalIsOpen: false})
   }
 
   render () {
