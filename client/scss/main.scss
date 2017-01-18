@@ -71,6 +71,10 @@ svg {
     &.boss {
       fill: darkviolet;
     }
+    &.bossEdge {
+      fill: papayawhip;
+      opacity: 0;
+    }
     &.healthpack {
       fill: green;
     }

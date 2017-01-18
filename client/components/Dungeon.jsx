@@ -95,9 +95,14 @@ export default class Dungeon extends React.Component {
         hero: {x: item.x, y: item.y, visible: true},
         items: itemsRevised
       })
-    } else if (item.type === 'monster' || item.type === 'boss') {
+    } else if (item.type === 'monster' || item.type === 'bossEdge') {
       this.handleCombat(item, hero)
     } else if (item.type === 'exit') {
+      let itemsRevised = this.state.items.filter(i => i !== item)
+      this.setState({
+        hero: {x: item.x, y: item.y, visible: true},
+        items: itemsRevised
+      })
       this.fadeOutCandle()
       this.props.moveToNextDungeon()
       setTimeout(this.makeNewDungeon, 2500)
@@ -165,7 +170,7 @@ export default class Dungeon extends React.Component {
           {
             this.state.items.map((spot) => {
               let keyitem = spot.type + '_x' + spot.x + 'y' + spot.y
-              let itemRadius = spot.type === 'boss' ? 12 : 6
+              let itemRadius = spot.type === 'boss' ? 18 : 6
               return (
                 <circle
                   className={spot.type}

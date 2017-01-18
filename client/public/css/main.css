@@ -55,6 +55,9 @@ svg {
     fill: darkviolet; }
   svg circle.boss {
     fill: darkviolet; }
+  svg circle.bossEdge {
+    fill: papayawhip;
+    opacity: 0; }
   svg circle.healthpack {
     fill: green; }
   svg circle.candlelight {

@@ -198,7 +198,15 @@ const distributeItems = (openSpots, finalRoom, dLevel) => {
   if (dLevel < 4) {
     itemFillup.push({'type': 'exit', 'x': ex, 'y': ey})
   } else {
-    itemFillup.push({'type': 'boss', 'x': ex, 'y': ey, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex - 1, 'y': ey - 1, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex, 'y': ey - 1, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex + 1, 'y': ey - 1, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex - 1, 'y': ey + 1, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex, 'y': ey + 1, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex + 1, 'y': ey + 1, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex - 1, 'y': ey, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'bossEdge', 'x': ex + 1, 'y': ey, 'health': 100, 'damage': 20})
+    itemFillup.push({'type': 'boss', 'x': ex, 'y': ey})
   }
   newItems = itemFillup
 }
