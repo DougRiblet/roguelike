@@ -58,11 +58,14 @@ export default class Dungeon extends React.Component {
       this.props.openModal(0)
       this.props.resetValuesForNewGame()
       setTimeout(this.makeNewDungeon, 2200)
+      return
     } else if (newMonsterHealth < 1) {
       if (monster.type === 'boss') {
         this.props.openModal(1)
-        let itemsRevised = this.state.items.filter(i => i !== monster)
-        this.setState({items: itemsRevised})
+        this.fadeOutCandle()
+        this.props.resetValuesForNewGame()
+        setTimeout(this.makeNewDungeon, 2200)
+        return
       } else {
         console.log('monster vanquished')
         let itemsRevised = this.state.items.filter(i => i !== monster)

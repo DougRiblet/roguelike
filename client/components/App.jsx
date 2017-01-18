@@ -10,7 +10,7 @@ const customModalStyle = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)'
+    backgroundColor: 'rgba(52, 52, 52, 0.5)'
   },
   content: {
     position: 'absolute',
@@ -19,7 +19,7 @@ const customModalStyle = {
     right: 'auto',
     bottom: 'auto',
     width: '400px',
-    border: '1px solid #ccc',
+    border: '11px solid #b44',
     background: '#fff',
     color: '#333',
     overflow: 'auto',
@@ -27,7 +27,6 @@ const customModalStyle = {
     borderRadius: '4px',
     outline: 'none',
     padding: '20px'
-
   }
 }
 
@@ -42,6 +41,7 @@ export default class App extends React.Component {
       dungeonLevel: 1,
       modalIsOpen: true,
       modalMessage: 'SUZU: A ROGUELIKE',
+      modalPara: 'Guide your hero (red) through the dungeon. Boost your hero by upgrading your weapon (light blue), finding healthpacks (green) and vanquishing monsters (purple). Locate the exit (gold) to advance to the next dungeon. Defeat the giant monster in dungeon 4 to win the game.',
       modalButtonText: 'Enter the Dungeon'
     }
     this.upgradeWeapon = this.upgradeWeapon.bind(this)
@@ -92,9 +92,11 @@ export default class App extends React.Component {
 
   openModal (num) {
     let mHead = ['Game Over, You Lose', 'Game Over, You Win']
+    let mPara = ['Try again?', 'Congratulations!']
     this.setState({
       modalIsOpen: true,
       modalMessage: mHead[num],
+      modalPara: mPara[num],
       modalButtonText: 'Start New Game'
     })
   }
@@ -121,6 +123,7 @@ export default class App extends React.Component {
             contentLabel='Modal'
           >
             <h2 className='modalH2'>{this.state.modalMessage}</h2>
+            <p className='modalP'>{this.state.modalPara}</p>
             <button onClick={this.closeModal} className='modalButton'>
               {this.state.modalButtonText}
             </button>
