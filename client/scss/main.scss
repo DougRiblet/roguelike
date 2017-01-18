@@ -1,12 +1,12 @@
 body {
-  background-color: #66665e;
+  background-color: #33332a;
   color: ghostwhite;
   margin: 0px;
   padding-top: 0px;
 }
 
 #statusBar {
-  background-color: #333;
+  background-color: #b44;
   padding: 8px 120px;
   margin: 0px auto;
 }
@@ -18,8 +18,8 @@ body {
     width: 200px;
     margin-right: 40px;
     font-family: Menlo, "Lucida Console", Courier, monospace;
-    font-size: 13px;
-    color: #c2c7cc;
+    font-size: 16px;
+    color: #d7d7d7;
   }
 }
 
@@ -36,7 +36,7 @@ svg {
     width: 14px;
     height: 14px;
     &.onrock {
-      fill: navy;
+      fill: #33332a;
     }
     &.onopen {
       fill: papayawhip;
@@ -45,7 +45,7 @@ svg {
       width: 1176px;
       height: 588px;
       stroke: none;
-      fill: #66665e;
+      fill: #33332a;
       mask: url(#lightAroundHero);
     }
     &.anticandle {

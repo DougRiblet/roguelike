@@ -165,13 +165,14 @@ export default class Dungeon extends React.Component {
           {
             this.state.items.map((spot) => {
               let keyitem = spot.type + '_x' + spot.x + 'y' + spot.y
+              let itemRadius = spot.type === 'boss' ? 12 : 6
               return (
                 <circle
                   className={spot.type}
                   key={keyitem}
                   cx={spot.x * 14 + 7}
                   cy={spot.y * 14 + 7}
-                  r='6'
+                  r={itemRadius}
                 />
               )
             })
