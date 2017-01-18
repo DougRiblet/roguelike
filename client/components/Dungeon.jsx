@@ -67,14 +67,12 @@ export default class Dungeon extends React.Component {
         setTimeout(this.makeNewDungeon, 2200)
         return
       } else {
-        console.log('monster vanquished')
         let itemsRevised = this.state.items.filter(i => i !== monster)
         this.setState({items: itemsRevised})
         this.props.logMonsterKill()
         this.props.addHealth(monster.damage)
       }
     } else {
-      console.log('the battle continues')
       let itemsRevised = this.state.items.filter(i => i !== monster)
       this.props.addHealth(-monster.damage)
       monster.health = newMonsterHealth
