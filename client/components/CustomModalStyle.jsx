@@ -15,7 +15,7 @@ const customModalStyle = {
     bottom: 'auto',
     width: '400px',
     border: '11px solid #b44',
-    background: '#fff',
+    background: 'papayawhip',
     color: '#333',
     overflow: 'auto',
     WebkitOverflowScrolling: 'touch',

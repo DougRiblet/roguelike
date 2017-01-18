@@ -174,12 +174,14 @@ const placeHeroStart = (room) => {
 
 const distributeItems = (openSpots, finalRoom, dLevel) => {
   let monsterCount = 8
-  let healthCount = 14
+  let healthCount = 12
   let itemFillup = []
   while (monsterCount > 0) {
     let index = Math.floor(Math.random() * openSpots.length)
     let spot = openSpots[index]
-    itemFillup.push({'type': 'monster', 'x': spot.x, 'y': spot.y, 'health': 50, 'damage': 50})
+    let randomDamage = (22 + Math.floor(Math.random() * 6)) * dLevel
+    let randomHealth = (44 + Math.floor(Math.random() * 12)) * dLevel
+    itemFillup.push({'type': 'monster', 'x': spot.x, 'y': spot.y, 'health': randomHealth, 'damage': randomDamage})
     openSpots.splice(index, 1)
     monsterCount--
   }

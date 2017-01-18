@@ -53,8 +53,8 @@ export default class Dungeon extends React.Component {
   }
 
   handleCombat (monster, hero) {
-    let newMonsterHealth = monster.health - this.props.weaponCurrent.power
-    let newHeroHealth = this.props.health - monster.damage
+    let newMonsterHealth = monster.health - this.props.weaponCurrent.power - (5 * this.props.heroProwess)
+    let newHeroHealth = this.props.health - monster.damage + (5 * this.props.heroProwess)
     if (newHeroHealth < 1) {
       this.fadeOutCandle()
       this.props.openModal(0)
@@ -62,18 +62,10 @@ export default class Dungeon extends React.Component {
       setTimeout(this.makeNewDungeon, 2200)
       return
     } else if (newMonsterHealth < 1) {
-      if (monster.type === 'boss') {
-        this.props.openModal(1)
-        this.fadeOutCandle()
-        this.props.resetValuesForNewGame()
-        setTimeout(this.makeNewDungeon, 2200)
-        return
-      } else {
-        let itemsRevised = this.state.items.filter(i => i !== monster)
-        this.setState({items: itemsRevised})
-        this.props.logMonsterKill()
-        this.props.addHealth(monster.damage)
-      }
+      let itemsRevised = this.state.items.filter(i => i !== monster)
+      this.setState({items: itemsRevised})
+      this.props.logMonsterKill()
+      this.props.addHealth(Math.floor(monster.damage / 3))
     } else {
       let itemsRevised = this.state.items.filter(i => i !== monster)
       this.props.addHealth(-monster.damage)

@@ -15,7 +15,7 @@ export default class App extends React.Component {
       dungeonLevel: 1,
       modalIsOpen: true,
       modalMessage: 'SUZU: A ROGUELIKE',
-      modalPara: 'Guide your hero (red) through the dungeon. Boost your hero by upgrading your weapon (light blue), finding healthpacks (green) and vanquishing monsters (purple). Locate the exit (gold) to advance to the next dungeon. Defeat the giant monster in dungeon 4 to win the game.',
+      modalPara: 'Guide your hero (red) through the dungeon. Boost your hero by upgrading your weapon (turquoise), finding healthpacks (green) and vanquishing monsters (purple). Locate the exit (gold) to advance to the next dungeon. Defeat the giant monster in dungeon 4 to win the game.',
       modalButtonText: 'Enter the Dungeon'
     }
     this.upgradeWeapon = this.upgradeWeapon.bind(this)
