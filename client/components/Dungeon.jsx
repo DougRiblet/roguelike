@@ -8,6 +8,7 @@ export default class Dungeon extends React.Component {
       grid: Array.from({length: 42}, () => Array.from({length: 84}, () => 'rock')),
       hero: {'visible': false},
       items: [],
+      bossHealth: 0,
       candle: 'candledark'
     }
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -33,6 +34,7 @@ export default class Dungeon extends React.Component {
       hero: newDun.hero,
       grid: newDun.grid,
       items: newDun.items,
+      bossHealth: newDun.bossHealth,
       candle: 'candledark'
     })
     setTimeout(this.fadeInCandle, 100)
@@ -80,6 +82,27 @@ export default class Dungeon extends React.Component {
     }
   }
 
+  handleBoss (hero) {
+    let newBossHealth = this.state.bossHealth - this.props.weaponCurrent.power
+    let newHeroHealth = this.props.health - 50
+    if (newHeroHealth < 1) {
+      this.fadeOutCandle()
+      this.props.openModal(0)
+      this.props.resetValuesForNewGame()
+      setTimeout(this.makeNewDungeon, 2200)
+      return
+    } else if (newBossHealth < 1) {
+      this.props.openModal(1)
+      this.fadeOutCandle()
+      this.props.resetValuesForNewGame()
+      setTimeout(this.makeNewDungeon, 2200)
+      return
+    } else {
+      this.props.addHealth(-50)
+      this.setState({bossHealth: newBossHealth})
+    }
+  }
+
   handleItemContact (item, hero) {
     if (item.type === 'weapon') {
       this.props.upgradeWeapon(this.props.dungeonLevel)
@@ -95,8 +118,10 @@ export default class Dungeon extends React.Component {
         hero: {x: item.x, y: item.y, visible: true},
         items: itemsRevised
       })
-    } else if (item.type === 'monster' || item.type === 'bossEdge') {
+    } else if (item.type === 'monster') {
       this.handleCombat(item, hero)
+    } else if (item.type === 'bossEdge') {
+      this.handleBoss(hero)
     } else if (item.type === 'exit') {
       let itemsRevised = this.state.items.filter(i => i !== item)
       this.setState({

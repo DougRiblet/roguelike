@@ -33,12 +33,14 @@ const generateDungeon = (dLevel) => {
     }
   }
   distributeItems(openSpots, roomsSorted[roomsSorted.length - 1], dLevel)
+  let newBossHealth = 400 + Math.floor(Math.random() * 50)
   // place hero in upper left room to start
   placeHeroStart(roomsSorted[0])
   return {
     'grid': newGrid,
     'items': newItems,
-    'hero': newHero
+    'hero': newHero,
+    'bossHealth': newBossHealth
   }
 }
 
