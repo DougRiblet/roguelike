@@ -111,6 +111,7 @@ export default class Dungeon extends React.Component {
         hero: {x: item.x, y: item.y, visible: true},
         items: itemsRevised
       })
+      return
     } else if (item.type === 'healthpack') {
       this.props.addHealth(20)
       let itemsRevised = this.state.items.filter(i => i !== item)
@@ -118,10 +119,13 @@ export default class Dungeon extends React.Component {
         hero: {x: item.x, y: item.y, visible: true},
         items: itemsRevised
       })
+      return
     } else if (item.type === 'monster') {
       this.handleCombat(item, hero)
+      return
     } else if (item.type === 'bossEdge') {
       this.handleBoss(hero)
+      return
     } else if (item.type === 'exit') {
       let itemsRevised = this.state.items.filter(i => i !== item)
       this.setState({
