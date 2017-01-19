@@ -77,4 +77,20 @@ svg {
   margin: 0 0 0.6em 0; }
 
 .modalP {
-  font-family: Arial, Helvetica, Sans-Serif; }
+  font-family: Arial, Helvetica, Sans-Serif;
+  font-size: 14px; }
+
+.modalButton {
+  background-color: #b44;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: Arial, Helvetica, Sans-Serif;
+  font-size: 16px;
+  border-radius: 4px; }
+  .modalButton:hover {
+    background-color: #722;
+    cursor: pointer; }
