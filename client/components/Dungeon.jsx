@@ -1,5 +1,5 @@
 import React from 'react'
-import generateDungeon from './DungeonMaker'
+import generateDungeon from './helpers/DungeonMaker'
 
 export default class Dungeon extends React.Component {
   constructor (props) {

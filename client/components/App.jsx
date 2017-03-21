@@ -1,8 +1,8 @@
 import React from 'react'
+import Modal from 'react-modal'
 import Status from './Status'
 import Dungeon from './Dungeon'
-import Modal from 'react-modal'
-import customModalStyle from './CustomModalStyle'
+import customModalStyle from './helpers/CustomModalStyle'
 
 export default class App extends React.Component {
   constructor (props) {
