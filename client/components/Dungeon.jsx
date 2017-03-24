@@ -1,6 +1,7 @@
 import React from 'react'
 import MaskDefs from './MaskDefs'
 import MaskRect from './MaskRect'
+import GridRect from './GridRect'
 import generateDungeon from './helpers/DungeonMaker'
 
 export default class Dungeon extends React.Component {
@@ -19,6 +20,7 @@ export default class Dungeon extends React.Component {
     this.makeNewDungeon = this.makeNewDungeon.bind(this)
     this.fadeInCandle = this.fadeInCandle.bind(this)
     this.fadeOutCandle = this.fadeOutCandle.bind(this)
+    this.displayGrid = this.displayGrid.bind(this)
   }
 
   componentDidMount () {
@@ -171,25 +173,28 @@ export default class Dungeon extends React.Component {
     }
   }
 
+  displayGrid () {
+    return this.state.grid.map((row, gy) => {
+      return row.map((dot, gx) => {
+        let oxo = 'on' + String(dot)
+        let keyrect = 'x' + gx + 'y' + gy
+        return (
+          <GridRect
+            oxo={oxo}
+            keyrect={keyrect}
+            gx={gx}
+            gy={gy}
+          />
+        )
+      })
+    })
+  }
+
   render () {
     return (
       <div>
         <svg>
-          {
-            this.state.grid.map((row, gy) => {
-              return row.map((dot, gx) => {
-                let oxo = 'on' + String(dot)
-                let keyrect = 'x' + gx + 'y' + gy
-                return (
-                  <rect
-                    className={oxo}
-                    key={keyrect}
-                    x={gx * 14} y={gy * 14}
-                  />
-                )
-              })
-            })
-          }
+          { this.displayGrid() }
           {
             this.state.items.map((spot) => {
               let keyitem = spot.type + '_x' + spot.x + 'y' + spot.y
