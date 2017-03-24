@@ -12,7 +12,7 @@ export default class Status extends React.Component {
         <ul id='statusList'>
           <li>Health: {this.props.health}</li>
           <li>Weapon: {this.props.weaponCurrent.name}</li>
-          <li>Level: {this.props.heroProwess}</li>
+          <li>Prowess: {this.props.heroProwess}</li>
           <li>Dungeon: {this.props.dungeonLevel}</li>
           <li>
             <span
