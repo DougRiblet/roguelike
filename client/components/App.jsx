@@ -67,7 +67,6 @@ export default class App extends React.Component {
   }
 
   toggleMask () {
-    console.log('#########toggle mask')
     this.setState({maskOn: !this.state.maskOn})
   }
 
