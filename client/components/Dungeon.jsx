@@ -1,4 +1,5 @@
 import React from 'react'
+import MaskDefs from './MaskDefs'
 import generateDungeon from './helpers/DungeonMaker'
 
 export default class Dungeon extends React.Component {
@@ -212,28 +213,10 @@ export default class Dungeon extends React.Component {
             />
           }
           {this.state.hero.visible && this.props.maskOn &&
-            <defs>
-              <mask
-                id='lightAroundHero'
-                maskUnits='userSpaceOnUse'
-                x='0'
-                y='0'
-                width='1176'
-                height='588'
-              >
-                <rect
-                  className='anticandle'
-                  x='0'
-                  y='0'
-                />
-                <circle
-                  className={this.state.candle}
-                  cx={this.state.hero.x * 14 + 7}
-                  cy={this.state.hero.y * 14 + 7}
-                  r='84'
-                />
-              </mask>
-            </defs>
+            <MaskDefs
+              hero={this.state.hero}
+              candle={this.state.candle}
+            />
           }
           {this.state.hero.visible && this.props.maskOn &&
             <rect
