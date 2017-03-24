@@ -2,6 +2,7 @@ import React from 'react'
 import MaskDefs from './MaskDefs'
 import MaskRect from './MaskRect'
 import GridRect from './GridRect'
+import ItemCirc from './ItemCirc'
 import generateDungeon from './helpers/DungeonMaker'
 
 export default class Dungeon extends React.Component {
@@ -176,17 +177,18 @@ export default class Dungeon extends React.Component {
   displayGrid () {
     return this.state.grid.map((row, gy) => {
       return row.map((dot, gx) => {
-        let oxo = 'on' + String(dot)
-        let keyrect = 'x' + gx + 'y' + gy
         return (
-          <GridRect
-            oxo={oxo}
-            keyrect={keyrect}
-            gx={gx}
-            gy={gy}
-          />
+          <GridRect dot={dot} gx={gx} gy={gy} />
         )
       })
+    })
+  }
+
+  displayItems () {
+    return this.state.items.map((spot) => {
+      return (
+        <ItemCirc spot={spot} />
+      )
     })
   }
 
@@ -195,21 +197,7 @@ export default class Dungeon extends React.Component {
       <div>
         <svg>
           { this.displayGrid() }
-          {
-            this.state.items.map((spot) => {
-              let keyitem = spot.type + '_x' + spot.x + 'y' + spot.y
-              let itemRadius = spot.type === 'boss' ? 18 : 6
-              return (
-                <circle
-                  className={spot.type}
-                  key={keyitem}
-                  cx={spot.x * 14 + 7}
-                  cy={spot.y * 14 + 7}
-                  r={itemRadius}
-                />
-              )
-            })
-          }
+          { this.displayItems() }
           {this.state.hero.visible &&
             <circle
               className='hero'
