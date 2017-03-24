@@ -1,5 +1,6 @@
 import React from 'react'
 import MaskDefs from './MaskDefs'
+import MaskRect from './MaskRect'
 import generateDungeon from './helpers/DungeonMaker'
 
 export default class Dungeon extends React.Component {
@@ -219,11 +220,7 @@ export default class Dungeon extends React.Component {
             />
           }
           {this.state.hero.visible && this.props.maskOn &&
-            <rect
-              x='0'
-              y='0'
-              className='maskRect'
-            />
+            <MaskRect />
           }
         </svg>
       </div>
