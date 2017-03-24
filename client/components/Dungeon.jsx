@@ -3,6 +3,7 @@ import MaskDefs from './MaskDefs'
 import MaskRect from './MaskRect'
 import GridRect from './GridRect'
 import ItemCirc from './ItemCirc'
+import OurHero from './OurHero'
 import generateDungeon from './helpers/DungeonMaker'
 
 export default class Dungeon extends React.Component {
@@ -22,6 +23,8 @@ export default class Dungeon extends React.Component {
     this.fadeInCandle = this.fadeInCandle.bind(this)
     this.fadeOutCandle = this.fadeOutCandle.bind(this)
     this.displayGrid = this.displayGrid.bind(this)
+    this.displayItems = this.displayItems.bind(this)
+    this.displayHero = this.displayHero.bind(this)
   }
 
   componentDidMount () {
@@ -192,20 +195,17 @@ export default class Dungeon extends React.Component {
     })
   }
 
+  displayHero () {
+    return this.state.hero.visible ? <OurHero hero={this.state.hero} /> : ''
+  }
+
   render () {
     return (
       <div>
         <svg>
           { this.displayGrid() }
           { this.displayItems() }
-          {this.state.hero.visible &&
-            <circle
-              className='hero'
-              cx={this.state.hero.x * 14 + 7}
-              cy={this.state.hero.y * 14 + 7}
-              r='6'
-            />
-          }
+          { this.displayHero() }
           {this.state.hero.visible && this.props.maskOn &&
             <MaskDefs
               hero={this.state.hero}
