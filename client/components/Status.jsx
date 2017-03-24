@@ -15,9 +15,11 @@ export default class Status extends React.Component {
           <li>Level: {this.props.heroProwess}</li>
           <li>Dungeon: {this.props.dungeonLevel}</li>
           <li>
-            <button onClick={this.props.toggleMask} id='toggle-mask'>
-              Lights
-            </button>
+            <span
+              onClick={this.props.toggleMask}
+              className='fa fa-lightbulb-o'
+              id='toggle-mask'
+            />
           </li>
         </ul>
       </div>
