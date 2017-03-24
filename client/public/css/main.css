@@ -13,7 +13,7 @@ body {
   margin: 0px; }
   #statusList li {
     display: inline-block;
-    width: 200px;
+    width: 150px;
     margin-right: 40px;
     font-family: Menlo, "Lucida Console", Courier, monospace;
     font-size: 16px;

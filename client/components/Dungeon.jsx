@@ -211,7 +211,7 @@ export default class Dungeon extends React.Component {
               r='6'
             />
           }
-          {this.state.hero.visible &&
+          {this.state.hero.visible && this.props.maskOn &&
             <defs>
               <mask
                 id='lightAroundHero'
@@ -235,7 +235,7 @@ export default class Dungeon extends React.Component {
               </mask>
             </defs>
           }
-          {this.state.hero.visible &&
+          {this.state.hero.visible && this.props.maskOn &&
             <rect
               x='0'
               y='0'

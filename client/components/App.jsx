@@ -13,6 +13,7 @@ export default class App extends React.Component {
       heroProwess: 1,
       monstersKilled: 0,
       dungeonLevel: 1,
+      maskOn: true,
       modalIsOpen: true,
       modalMessage: 'SUZU: A ROGUELIKE',
       modalPara: 'Guide your hero (red) through the dungeon. Boost your hero by upgrading your weapon (turquoise), finding healthpacks (green) and vanquishing monsters (purple). Locate the exit (gold) to advance to the next dungeon. Defeat the giant monster in dungeon 4 to win the game.',
@@ -25,6 +26,7 @@ export default class App extends React.Component {
     this.logMonsterKill = this.logMonsterKill.bind(this)
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
+    this.toggleMask = this.toggleMask.bind(this)
   }
 
   upgradeWeapon (dLevel) {
@@ -64,6 +66,11 @@ export default class App extends React.Component {
     })
   }
 
+  toggleMask () {
+    console.log('#########toggle mask')
+    this.setState({maskOn: !this.state.maskOn})
+  }
+
   openModal (num) {
     let mHead = ['Game Over, You Lose', 'Game Over, You Win']
     let mPara = ['Try again?', 'Congratulations!']
@@ -88,6 +95,7 @@ export default class App extends React.Component {
             weaponCurrent={this.state.weaponCurrent}
             heroProwess={this.state.heroProwess}
             dungeonLevel={this.state.dungeonLevel}
+            toggleMask={() => this.toggleMask()}
           />
         </div>
         <div id='modalDiv'>
@@ -109,6 +117,7 @@ export default class App extends React.Component {
             weaponCurrent={this.state.weaponCurrent}
             heroProwess={this.state.heroProwess}
             dungeonLevel={this.state.dungeonLevel}
+            maskOn={this.state.maskOn}
             upgradeWeapon={(dLevel) => this.upgradeWeapon(dLevel)}
             addHealth={(num) => this.addHealth(num)}
             moveToNextDungeon={() => this.moveToNextDungeon()}
