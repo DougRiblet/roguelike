@@ -21,3 +21,14 @@ export default class Status extends React.Component {
     )
   }
 }
+
+Status.propTypes = {
+  health: React.PropTypes.number.isRequired,
+  heroProwess: React.PropTypes.number.isRequired,
+  dungeonLevel: React.PropTypes.number.isRequired,
+  toggleMask: React.PropTypes.func.isRequired,
+  weaponCurrent: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    power: React.PropTypes.number
+  }).isRequired
+}
