@@ -181,7 +181,12 @@ export default class Dungeon extends React.Component {
     return this.state.grid.map((row, gy) => {
       return row.map((dot, gx) => {
         return (
-          <GridRect dot={dot} gx={gx} gy={gy} />
+          <GridRect
+            dot={dot}
+            gx={gx}
+            gy={gy}
+            key={'x' + gx + 'y' + gy}
+          />
         )
       })
     })
@@ -190,7 +195,10 @@ export default class Dungeon extends React.Component {
   displayItems () {
     return this.state.items.map((spot) => {
       return (
-        <ItemCirc spot={spot} />
+        <ItemCirc
+          spot={spot}
+          key={spot.type + '_x' + spot.x + 'y' + spot.y}
+        />
       )
     })
   }
