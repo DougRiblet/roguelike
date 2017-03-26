@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default class OurHero extends React.Component {
-
   render () {
     return (
       <circle
@@ -12,5 +11,12 @@ export default class OurHero extends React.Component {
       />
     )
   }
+}
 
+OurHero.propTypes = {
+  hero: React.PropTypes.shape({
+    x: React.PropTypes.number,
+    y: React.PropTypes.number,
+    visible: React.PropTypes.bool
+  }).isRequired
 }

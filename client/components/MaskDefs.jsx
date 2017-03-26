@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default class MaskDefs extends React.Component {
-
   render () {
     return (
       <defs>
@@ -28,5 +27,13 @@ export default class MaskDefs extends React.Component {
       </defs>
     )
   }
+}
 
+MaskDefs.propTypes = {
+  candle: React.PropTypes.string.isRequired,
+  hero: React.PropTypes.shape({
+    x: React.PropTypes.number,
+    y: React.PropTypes.number,
+    visible: React.PropTypes.bool
+  }).isRequired
 }

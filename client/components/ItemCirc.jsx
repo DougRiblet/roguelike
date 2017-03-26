@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default class ItemCirc extends React.Component {
-
   render () {
     let spot = this.props.spot
     return (
@@ -13,5 +12,12 @@ export default class ItemCirc extends React.Component {
       />
     )
   }
+}
 
+ItemCirc.propTypes = {
+  spot: React.PropTypes.shape({
+    x: React.PropTypes.number,
+    y: React.PropTypes.number,
+    type: React.PropTypes.string
+  }).isRequired
 }

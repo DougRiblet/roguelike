@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default class GridRect extends React.Component {
-
   render () {
     return (
       <rect
@@ -11,5 +10,10 @@ export default class GridRect extends React.Component {
       />
     )
   }
+}
 
+GridRect.propTypes = {
+  gx: React.PropTypes.number.isRequired,
+  gy: React.PropTypes.number.isRequired,
+  dot: React.PropTypes.string.isRequired
 }

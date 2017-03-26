@@ -227,5 +227,23 @@ export default class Dungeon extends React.Component {
       </div>
     )
   }
-
 }
+
+Dungeon.propTypes = {
+  health: React.PropTypes.number.isRequired,
+  heroProwess: React.PropTypes.number.isRequired,
+  dungeonLevel: React.PropTypes.number.isRequired,
+  weaponCurrent: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    power: React.PropTypes.number
+  }).isRequired,
+  maskOn: React.PropTypes.bool,
+  upgradeWeapon: React.PropTypes.func.isRequired,
+  addHealth: React.PropTypes.func.isRequired,
+  moveToNextDungeon: React.PropTypes.func.isRequired,
+  logMonsterKill: React.PropTypes.func.isRequired,
+  openModal: React.PropTypes.func.isRequired,
+  closeModal: React.PropTypes.func.isRequired,
+  resetValuesForNewGame: React.PropTypes.func.isRequired
+}
+
